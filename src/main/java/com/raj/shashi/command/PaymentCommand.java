@@ -1,4 +1,4 @@
-package com.raj.shashi.com.raj.shashi.command;
+package com.raj.shashi.command;
 
 public class PaymentCommand extends Command {
 

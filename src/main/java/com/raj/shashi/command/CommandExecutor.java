@@ -1,4 +1,4 @@
-package com.raj.shashi.com.raj.shashi.command;
+package com.raj.shashi.command;
 
 import com.raj.shashi.bank.BankFactory;
 import com.raj.shashi.dto.Person;
