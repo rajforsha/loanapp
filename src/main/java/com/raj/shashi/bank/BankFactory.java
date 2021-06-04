@@ -9,8 +9,8 @@ public class BankFactory {
 
         Map<String, Bank> factory = new HashMap<String, Bank>();
         factory.put("IDIDI", new IDIDIBank("IDIDI", "123", null));
-        factory.put("MBI", new IDIDIBank("MBI", "234", null));
-        factory.put("UON", new IDIDIBank("UON", "345", null));
+        factory.put("MBI", new MBIBank("MBI", "234", null));
+        factory.put("UON", new UONBank("UON", "345", null));
 
         return factory.get(bankName);
 

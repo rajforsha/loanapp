@@ -1,6 +1,4 @@
-import com.raj.shashi.com.raj.shashi.command.Command;
-import com.raj.shashi.com.raj.shashi.command.LoanCommand;
-import com.raj.shashi.com.raj.shashi.command.PaymentCommand;
+import com.raj.shashi.com.raj.shashi.command.*;
 import com.raj.shashi.utils.Reader;
 
 import java.util.ArrayList;
@@ -13,7 +11,8 @@ public class Application {
         // we need to get the details of banks registered
 
         List<Command> commands = new ArrayList<>();
-        List<String> lines = Reader.get("/resources/input.txt");
+        List<String> lines = Reader.get("/Users/shraj/Documents/groupon/shraj/loanapp/src/main/resources/input.txt");
+        CommandExecutor commandExecutor = new CommandExecutor();
         lines.forEach(line->{
 
             String [] values = line.split("\\s");
@@ -33,11 +32,20 @@ public class Application {
                     commands.add(paymentCommand);
                     break;
 
+                case "BALANCE":
+                    BalanceCommand balanceCommand = new BalanceCommand("BALANCE", values[1], values[2]);
+                    balanceCommand.setEmiNumber(Integer.valueOf(values[3]));
+                    commands.add(balanceCommand);
+                    break;
 
+                default:
+                    System.out.println("Command not supported");
 
             }
 
         });
+
+        commandExecutor.execute(commands); // executes all the command
 
     }
 

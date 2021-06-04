@@ -1,8 +1,6 @@
 package com.raj.shashi.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,27 +8,30 @@ public class Reader {
 
     public static List<String> get(String filePath){
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
+        FileInputStream fstream = null;
         BufferedReader br = null;
 
         try{
-
-            br = new BufferedReader(new FileReader(filePath));
+            fstream = new FileInputStream(filePath);
+            br = new BufferedReader(new InputStreamReader(fstream));
             String line;
             while((line = br.readLine())!=null){
                 result.add(line);
             }
-            br.close();
+            fstream.close();
 
         }catch(IOException e){
-
+            System.out.println(e.toString());
         }
         finally {
             try{
-                br.close();
+                if(fstream!=null){
+                    fstream.close();
+                }
             }
             catch(IOException ex){
-
+                System.out.println(ex.toString());
             }
 
         }
