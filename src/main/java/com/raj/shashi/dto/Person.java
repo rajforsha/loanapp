@@ -14,7 +14,7 @@ public class Person {
     private EmploymentProof employmentProof;
 
     public Person(String name) {
-        this.customerId = new Random().nextInt();
+        this.customerId = new Random().nextInt(100);
         this.name = name;
     }
 

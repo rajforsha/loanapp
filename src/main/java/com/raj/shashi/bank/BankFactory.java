@@ -5,12 +5,16 @@ import java.util.Map;
 
 public class BankFactory {
 
-    public static Bank getBank(String bankName){
+    private Map<String, Bank> factory;
 
-        Map<String, Bank> factory = new HashMap<String, Bank>();
+    public BankFactory() {
+        factory = new HashMap<>();
         factory.put("IDIDI", new IDIDIBank("IDIDI", "123", null));
         factory.put("MBI", new MBIBank("MBI", "234", null));
         factory.put("UON", new UONBank("UON", "345", null));
+    }
+
+    public Bank getBank(String bankName){
 
         return factory.get(bankName);
 

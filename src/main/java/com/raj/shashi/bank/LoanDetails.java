@@ -14,13 +14,17 @@ public class LoanDetails {
     private int years;
     private int totalInterest;
     private int rateOfInterest;
+    private int totalEmi;
     private int emiLeft;
+    private int emiPaid;
+    private int emiAmount;
     private Date startDate;
     private Date closedDate;
     private LoanStatus status;
+    private int amountPaid;
 
     public LoanDetails(int amount, int years, int rateOfInterest){
-        this.loanId = new Random().nextInt();
+        this.loanId = new Random().nextInt(500);
         this.setLoanAmount(amount);
         this.setRateOfInterest(rateOfInterest);
         this.setYears(years);
@@ -116,15 +120,64 @@ public class LoanDetails {
         this.totalInterest = totalInterest;
     }
 
+    public Integer getLoanAmount() {
+        return loanAmount;
+    }
+
+    public int getTotalEmi() {
+        return totalEmi;
+    }
+
+    public void setTotalEmi(int totalEmi) {
+        this.totalEmi = totalEmi;
+    }
+
+    public int getEmiPaid() {
+        return emiPaid;
+    }
+
+    public void setEmiPaid(int emiPaid) {
+        this.emiPaid = emiPaid;
+    }
+
+    public int getAmountPaid() {
+        return amountPaid;
+    }
+
+    public void setAmountPaid(int amountPaid) {
+        this.amountPaid = amountPaid;
+    }
+
+    public int getEmiAmount() {
+        return emiAmount;
+    }
+
+    public void setEmiAmount(int emiAmount) {
+        this.emiAmount = emiAmount;
+    }
+
     public void updateEmiDetails(){
 
-        int interest = (this.loanAmount * this.years * (this.rateOfInterest/ 100));
+        int interest = (this.loanAmount * this.years * (this.rateOfInterest)/ 100);
         int AmountToBePaid = interest + this.loanAmount;
-        int emiCount = AmountToBePaid / (years* 12);
+        int emiCount = years* 12;
+        int emiAmount = AmountToBePaid / (years* 12);
 
-        this.setEmiLeft(emiCount);
+        this.setEmiLeft(years*12);
+        this.setEmiPaid(0);
+        this.setTotalEmi(emiCount);
         this.setBalance(AmountToBePaid);
         this.setTotalAmountToBePaid(AmountToBePaid);
+        this.setEmiAmount(emiAmount);
+        this.setAmountPaid(0);
+    }
+
+    public void updateRemainingAmount(int lumpSumpAmount, int emiNo){
+
+        this.amountPaid += (emiNo * this.emiAmount) + lumpSumpAmount;
+        this.balance = this.totalAmountToBePaid - this.amountPaid;
+        this.setEmiPaid(emiNo + 1);
+        this.setEmiLeft(this.totalEmi - this.emiPaid);
     }
 
     @Override

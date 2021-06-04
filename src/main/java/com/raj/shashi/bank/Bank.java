@@ -28,10 +28,10 @@ public abstract class Bank {
         return regId;
     }
 
-    public abstract boolean sanctionLoan(Person person, int amount, int years, int rateOfInterest);
+    public abstract boolean sanctionLoan(String customerName, int amount, int years, int rateOfInterest);
 
-    public abstract boolean makePayment();
+    public abstract void makePayment(String customerName, int lumpSumpAmount, int emiNo);
 
-    public abstract void getBalance();
+    public abstract void getBalance(String customerName, int emiNo);
 
 }
