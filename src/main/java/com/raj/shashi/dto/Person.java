@@ -13,11 +13,9 @@ public class Person {
     private AddressProof addressProof;
     private EmploymentProof employmentProof;
 
-    public Person(String name, int age, Gender gender) {
+    public Person(String name) {
         this.customerId = new Random().nextInt();
         this.name = name;
-        this.age = age;
-        this.gender = gender;
     }
 
     public static class AddressProof{

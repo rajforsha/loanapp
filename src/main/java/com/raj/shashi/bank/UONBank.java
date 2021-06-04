@@ -29,18 +29,14 @@ public class UONBank extends Bank {
 
         // logic to validate the person and amount to be sanctioned, we assume that the person is sanctioned loan
 
-        LoanDetails loanDetails = new LoanDetails();
-        loanDetails.setLoanAmount(amount);
-        loanDetails.setRateOfInterest(rateOfInterest);
-        loanDetails.setYears(years);
+        LoanDetails loanDetails = new LoanDetails(amount, years, rateOfInterest);
         loanDetails.setStatus(LoanStatus.SANCTIONED);
-        loanDetails.setStartDate(new Date());
         loanDetails.updateEmiDetails();
 
         // calculate emi amount
 
         this.customersSanctionedLoans.put(person.getCustomerId(), loanDetails);
-        return true; // return false if something goes wrong
+        return true; // return false if something goes wrong with doc verification
     }
 
     public  boolean makePayment(){

@@ -19,8 +19,13 @@ public class LoanDetails {
     private Date closedDate;
     private LoanStatus status;
 
-    public LoanDetails(){
+    public LoanDetails(int amount, int years, int rateOfInterest){
         this.loanId = new Random().nextInt();
+        this.setLoanAmount(amount);
+        this.setRateOfInterest(rateOfInterest);
+        this.setYears(years);
+        this.setStatus(LoanStatus.PENDING);
+        this.setStartDate(new Date());
     }
 
     public int getLoanId() {
