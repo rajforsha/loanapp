@@ -1,3 +1,5 @@
+package com.raj.shashi.dto;
+
 public enum Gender {
 
     MALE("male"), FEMALE("female"), CANTDISCLOSE("can't disclose");

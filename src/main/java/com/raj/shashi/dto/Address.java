@@ -1,3 +1,5 @@
+package com.raj.shashi.dto;
+
 public class Address{
     private String city;
     private String pincode;

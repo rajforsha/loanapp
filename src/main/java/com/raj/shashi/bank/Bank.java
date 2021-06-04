@@ -1,3 +1,8 @@
+package com.raj.shashi.bank;
+
+import com.raj.shashi.dto.Address;
+import com.raj.shashi.dto.Person;
+
 public abstract class Bank {
 
     public Bank(String bankName, String regId, Address address){
@@ -23,7 +28,7 @@ public abstract class Bank {
         return regId;
     }
 
-    public abstract boolean sanctionLoan(Person person);
+    public abstract boolean sanctionLoan(Person person, int amount, int years, int rateOfInterest);
 
     public abstract boolean makePayment();
 
