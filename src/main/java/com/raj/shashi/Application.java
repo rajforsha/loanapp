@@ -10,8 +10,12 @@ public class Application {
 
     public  static void main(String [] args){
 
+        String filePath = "/Users/shraj/Documents/groupon/shraj/loanapp/src/main/resources/input2.txt";
+        if(args.length>0){
+            filePath = args[0];
+        }
         List<Command> commands = new ArrayList<>();
-        List<String> lines = Reader.get("/Users/shraj/Documents/groupon/shraj/loanapp/src/main/resources/input2.txt");
+        List<String> lines = Reader.get(filePath);
         CommandExecutor commandExecutor = new CommandExecutor();
         lines.forEach(line->{
 
