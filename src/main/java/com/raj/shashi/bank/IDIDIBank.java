@@ -42,15 +42,19 @@ public class IDIDIBank extends Bank {
 
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
         // emi no says the no of emi have been made, so need to update the remaining amount
-        loanDetails.updateRemainingAmount(lumpSumpAmount, emiNo);
+        loanDetails.updatePayment(lumpSumpAmount, emiNo);
         customersSanctionedLoans.put(person.getCustomerId(), loanDetails);
     }
 
     public  void getBalance(String customerName, int emiNo){
 
+        // return the amount paid by the customer including the emi no and the remaining emi count
+
         Person person = this.getPerson(customerName);
 
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
+        // we get the emi number which says the user has paid till the emi count, so we need to update the loan details
+        loanDetails.updateBalance(emiNo);
         int emiLeft = loanDetails.getEmiLeft();
         int amountPaidSoFar = loanDetails.getAmountPaid();
 

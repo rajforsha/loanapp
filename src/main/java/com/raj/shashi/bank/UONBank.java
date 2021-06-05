@@ -42,7 +42,7 @@ public class UONBank extends Bank {
         Person person = this.getPerson(customerName);
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
         // emi no says the no of emi have been made, so need to update the remaining amount
-        loanDetails.updateRemainingAmount(lumpSumpAmount, emiNo);
+        loanDetails.updatePayment(lumpSumpAmount, emiNo);
         customersSanctionedLoans.put(person.getCustomerId(), loanDetails);
     }
 
@@ -51,6 +51,7 @@ public class UONBank extends Bank {
         Person person = this.getPerson(customerName);
 
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
+        loanDetails.updateBalance(emiNo);
         int emiLeft = loanDetails.getEmiLeft();
         int amountPaidSoFar = loanDetails.getAmountPaid();
 

@@ -11,6 +11,7 @@ import java.util.Map;
 public class MBIBank extends Bank {
 
     private Map<String, Person> customers;
+    // there could be multiple loans sanctioned to a customer, but for the simplicity we are considering just once
     private Map<Integer, LoanDetails> customersSanctionedLoans;
 
     public MBIBank(String bankName, String regId, Address address){
@@ -41,7 +42,7 @@ public class MBIBank extends Bank {
         Person person = this.getPerson(customerName);
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
         // emi no says the no of emi have been made, so need to update the remaining amount
-        loanDetails.updateRemainingAmount(lumpSumpAmount, emiNo);
+        loanDetails.updatePayment(lumpSumpAmount, emiNo);
         customersSanctionedLoans.put(person.getCustomerId(), loanDetails);
     }
 
@@ -49,6 +50,7 @@ public class MBIBank extends Bank {
 
         Person person = this.getPerson(customerName);
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
+        loanDetails.updateBalance(emiNo);
         int emiLeft = loanDetails.getEmiLeft();
         int amountPaidSoFar = loanDetails.getAmountPaid();
 

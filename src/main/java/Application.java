@@ -8,10 +8,8 @@ public class Application {
 
     public  static void main(String [] args){
 
-        // we need to get the details of banks registered
-
         List<Command> commands = new ArrayList<>();
-        List<String> lines = Reader.get("/Users/shraj/Documents/groupon/shraj/loanapp/src/main/resources/input.txt");
+        List<String> lines = Reader.get("/Users/shraj/Documents/groupon/shraj/loanapp/src/main/resources/input2.txt");
         CommandExecutor commandExecutor = new CommandExecutor();
         lines.forEach(line->{
 
