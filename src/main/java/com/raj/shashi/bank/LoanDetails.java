@@ -160,10 +160,10 @@ public class LoanDetails {
 
         int interest = (this.loanAmount * this.years * (this.rateOfInterest)/ 100);
         int AmountToBePaid = interest + this.loanAmount;
-        int emiCount = years* 12;
-        int emiAmount = (int)Math.ceil(AmountToBePaid / (years* 12));
+        int emiCount = this.years* 12;
+        int emiAmount = (int)Math.ceil(AmountToBePaid / (this.years* 12));
 
-        this.setEmiLeft(years*12);
+        this.setEmiLeft(this.years*12);
         this.setEmiPaid(0);
         this.setTotalEmi(emiCount);
         this.setBalance(AmountToBePaid);
@@ -175,18 +175,23 @@ public class LoanDetails {
     public void updatePayment(int lumpSumpAmount, int emiNo){
 
         // modify emiAmount , if the lump sump amount is paid
+        int reduceEmiCountByNumber = 0;
+
+        if(lumpSumpAmount > this.emiAmount){
+            reduceEmiCountByNumber = (lumpSumpAmount - this.emiAmount) / this.emiAmount;
+        }
 
         this.amountPaid += (emiNo * this.emiAmount) + lumpSumpAmount;
         this.balance = this.totalAmountToBePaid - this.amountPaid;
-        this.setEmiPaid(lumpSumpAmount >0 ? emiNo + 1 : emiNo);
-        this.setEmiLeft(this.totalEmi - this.emiPaid);
+        this.setEmiPaid(emiNo + 1);
+        this.setEmiLeft(this.totalEmi - this.emiPaid - reduceEmiCountByNumber);
     }
 
     public void updateBalance(int emiNo){
 
         // this is updated for the emi number
 
-        this.amountPaid = (emiNo * this.emiAmount);
+        this.amountPaid += (emiNo - this.emiPaid) * this.emiAmount;
         this.balance = this.totalAmountToBePaid - this.amountPaid;
         this.setEmiPaid(emiNo);
         this.setEmiLeft(this.totalEmi - this.emiPaid);

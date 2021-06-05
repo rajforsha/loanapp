@@ -16,7 +16,7 @@ public class UONBank extends Bank {
     public UONBank(String bankName, String regId, Address address){
         super(bankName, regId, address);
         this.customers = new HashMap<>();
-        this.customersSanctionedLoans = new HashMap<Integer, LoanDetails>();
+        this.customersSanctionedLoans = new HashMap<>();
     }
 
     public  boolean sanctionLoan(String customerName, int amount, int years, int rateOfInterest){
@@ -48,9 +48,12 @@ public class UONBank extends Bank {
 
     public  void getBalance(String customerName, int emiNo){
 
+        // return the amount paid by the customer including the emi no and the remaining emi count
+
         Person person = this.getPerson(customerName);
 
         LoanDetails loanDetails = customersSanctionedLoans.get(person.getCustomerId());
+        // we get the emi number which says the user has paid till the emi count, so we need to update the loan details
         loanDetails.updateBalance(emiNo);
         int emiLeft = loanDetails.getEmiLeft();
         int amountPaidSoFar = loanDetails.getAmountPaid();
