@@ -156,11 +156,14 @@ public class LoanDetails {
         this.emiAmount = emiAmount;
     }
 
+    /**
+     * updates the emi details when the loan is sanctioned
+     */
     public void updateEmiDetails(){
 
         int interest = (this.loanAmount * this.years * (this.rateOfInterest)/ 100);
         int AmountToBePaid = interest + this.loanAmount;
-        int emiCount = this.years* 12;
+        int emiCount = (int)Math.ceil(this.years* 12);
         int emiAmount = (int)Math.ceil(AmountToBePaid / (this.years* 12));
 
         this.setEmiLeft(this.years*12);
@@ -172,20 +175,32 @@ public class LoanDetails {
         this.setAmountPaid(0);
     }
 
-    public void updatePayment(int lumpSumpAmount, int emiNo){
+    /**
+     *
+     * @param lumpSumpAmount
+     * @param emiNo
+     * it receives the lump sump amount, which will reduce the no of emiLeft
+     * increases the amount paid
+     */
 
-        // modify emiAmount , if the lump sump amount is paid
+    public void updatePayment(int lumpSumpAmount, int emiNo){
         int reduceEmiCountByNumber = 0;
 
-        if(lumpSumpAmount > this.emiAmount){
-            reduceEmiCountByNumber = (lumpSumpAmount - this.emiAmount) / this.emiAmount;
+        if(lumpSumpAmount >= this.emiAmount){
+            reduceEmiCountByNumber = (int)Math.ceil(lumpSumpAmount / this.emiAmount);
         }
 
-        this.amountPaid += (emiNo * this.emiAmount) + lumpSumpAmount;
+        this.amountPaid += lumpSumpAmount;
         this.balance = this.totalAmountToBePaid - this.amountPaid;
-        this.setEmiPaid(emiNo + 1);
         this.setEmiLeft(this.totalEmi - this.emiPaid - reduceEmiCountByNumber);
     }
+
+    /**
+     *
+     * @param emiNo
+     * emiNo indicates that the user has made the payment till the emiNo and now we need to
+     * return the balance left
+     */
 
     public void updateBalance(int emiNo){
 
